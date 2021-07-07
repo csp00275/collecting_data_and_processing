@@ -14,9 +14,3 @@ while (True):
     theta0 = float(SsplitPacket[0])
     theta1 = float(SsplitPacket[1])
     print("theta0=",theta0,"theta1=",theta1)
-
-
-
-
-
-
