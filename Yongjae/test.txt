@@ -1,0 +1,20 @@
+import pandas as pd
+import tensorflow as tf
+from tensorflow.keras import layers
+
+temp_data = pd.read_csv('C:/Users/Lab/Desktop/forLearing_final.csv')
+
+x_data = temp_data.iloc[:,:10]
+y_data = temp_data.iloc[:,10:]
+
+model = tf.keras.Sequential()
+model.add(layers.Dense(16, activation = 'relu', input_shape = [x_data.shape[0]]))
+model.add(layers.Dense(8,  activation = 'relu'))
+model.add(layers.Dense(6,  activation = 'relu'))
+model.add(layers.Dense(3))
+
+model.compile(loss = 'mse', optimizer=tf.keras.optimizers.Adam(0.00001), metrics=['mae', 'mse'])
+
+hist = model.fit(x_data, y_data, epochs=10, verbose=1)
+
+model.save('my_model.h5')
