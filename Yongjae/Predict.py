@@ -4,11 +4,13 @@ import tensorflow as tf
 from tensorflow.keras import layers
 import serial
 
-model = tf.keras.models.load_model('E100_h128_NoR.h5')
+model = tf.keras.models.load_model('Sensor2thetaMean11.h5')
 
 simple = serial.Serial('COM4',115200,timeout=1)
 
 tof = [0,0,0,0,0,0,0,0,0,0]
+
+toRad = float(np.pi/180)
 
 while (True):
     while (simple.inWaiting()==0):
@@ -19,12 +21,12 @@ while (True):
     if len(SsplitPacket) >= 10:
         for i in range(0,10):
             tof[i] = float(SsplitPacket[i])
-            print(tof[i],end=' ')
+            #print(tof[i],end=' ')
 
         tof2 = np.array(tof).reshape(-1,1).T
-        # print(tof.shape)
+        #print(tof.shape)
         Predict = model.predict(tof2)
-        print('theta: ', Predict[:,0], 'z: ',Predict[:,1])
+        print('theta: ', Predict[:,0])
 
 
 
