@@ -26,9 +26,9 @@ zArrow = arrow(length=AxisLen,shaftwidth=AxisWid,color=color.green, axis=vector(
 R = 80  #cylinder D=160
 L = 300 #cylinder
 
-upper_arm = cylinder(axis=vector(0,0,1),pos=vector(0,0,0),radius=R,length=L,opacity=1,shininess =.1)
-joint = sphere(axis=vector(0,0,1),pos=vector(0,0,0),radius=R,opacity=1)
-fore_arm = cylinder(radius=R,length=L,opacity=1)
+upper_arm = cylinder(axis=vector(0,0,1),pos=vector(0,0,0),radius=R,length=L,opacity=.5,shininess =.1)
+joint = sphere(axis=vector(0,0,1),pos=vector(0,0,0),radius=R,opacity=.5)
+fore_arm = cylinder(radius=R,length=L,opacity=.5)
 
 theta = 270 # we can attach encoder data to here
 thetaChange = 0

@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras import layers
+from sklearn.preprocessing import StandardScaler
+from joblib import dump, load
 import serial
 
 model = tf.keras.models.load_model('Sensor2thetaMean11.h5')
+scaler = load('scaler_01.pkl')
 
 simple = serial.Serial('COM4',115200,timeout=1)
 
@@ -24,8 +26,9 @@ while (True):
             #print(tof[i],end=' ')
 
         tof2 = np.array(tof).reshape(-1,1).T
+        tof3 = scaler.transform(tof2)
         #print(tof.shape)
-        Predict = model.predict(tof2)
+        Predict = model.predict(tof3)
         print('theta: ', Predict[:,0])
 
 

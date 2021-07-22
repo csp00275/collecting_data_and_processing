@@ -4,7 +4,7 @@ import numpy as np
 import math
 import serial
 
-port = 'COM3' # 시리얼 포트
+port = 'COM4' # 시리얼 포트
 baud = 115200 # 시리얼 보드레이트(통신속도)
 
 ad=serial.Serial(port,baud)

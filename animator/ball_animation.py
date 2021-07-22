@@ -8,16 +8,16 @@ front = box(pos=vector(0,0,-5),length=10,width=.1,height=10,color=color.white,op
 
 ball=sphere(radius=.5, color=color.red)
 
-xpos = 0
-ypos = 1
-zpos = -2
+xpos = 3
+ypos = 0
+zpos = -4
 
 xchange = .1
 ychange = .1
 zchange = .1
 
 while True:
-    rate(50)
+    rate(50) #올리면 빠르게 공이 움직임
     ball.pos = vector (xpos, ypos, zpos)
     xpos = xpos + xchange
     ypos = ypos + ychange
