@@ -8,6 +8,7 @@ arduino = serial.Serial('COM4',115200,timeout=1)
 
 print("Starting Conversation with Arduino")
 
+
 SayingTo = input()
 
 SayingToArduino = SayingTo.encode("utf-8")
@@ -80,7 +81,7 @@ while True:
     SdataPacket = str(SdataPacket, "utf-8")
     SsplitPacket = SdataPacket.split(" ")
 
-    file_path = "C:/Users/Lab/Desktop/LYS/Coding/Python/Mean115454.csv"
+    file_path = "C:/Users/Lab/Desktop/LYS/Coding/Python/0805_70ms_Mean3ea.csv"
     if len(SsplitPacket) >= len(tof):
         file = open(file_path, 'a',encoding = "utf-8", newline='')
         csv_writer = csv.writer(file)

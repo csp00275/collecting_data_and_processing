@@ -1,8 +1,11 @@
 import serial, time, csv
 import numpy as np
 
-tof = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-arduino = serial.Serial('COM4',115200,timeout=1)
+sennum=28
+tof = np.zeros(sennum)
+arduino = serial.Serial('COM3',115200,timeout=1)
+run_date = time.strftime("%Y_%m_%d")
+run_time = time.strftime("run_%H_%M_%S")
 
 print("Starting Conversation with Arduino")
 print(len(tof))
@@ -21,12 +24,14 @@ while True:
     SdataPacket = str(SdataPacket, "utf-8")
     SsplitPacket = SdataPacket.split(" ")
 
-    file_path = "C:/Users/Lab/Desktop/LYS/Coding/Python/210805_50ms_Data.csv"
-    if len(SsplitPacket) >= len(tof):
+    file_path = "C:/Users/Lab/Desktop/LYS/Software/LABS_2.0/myData/"+run_date+"_70ms_3ea_Data_"+run_time+".csv"
+
+
+    if len(SsplitPacket) == len(tof)+1:
         file = open(file_path, 'a',encoding = "utf-8", newline='')
         csv_writer = csv.writer(file)
         csv_writer.writerow(SsplitPacket)
-        for i in range(0,17):
+        for i in range(0,sennum):
             tof[i] = float(SsplitPacket[i])
             print(tof[i],end=' ')
     print("")

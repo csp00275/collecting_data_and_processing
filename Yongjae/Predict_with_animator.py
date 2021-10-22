@@ -30,9 +30,9 @@ xarrow = arrow(length=axis_length,shaftwidth=axis_width,color=color.red, axis=ve
 zarrow = arrow(length=axis_length,shaftwidth=axis_width,color=color.green, axis=vector(0,0,1))
 yarrow = arrow(length=axis_length,shaftwidth=axis_width,color=color.blue, axis=vector(0,1,0))
 
-D = 160 #cylinder
+D = 200 #cylinder
 R = D/2
-L = 216 #cylinder
+L = 200 #cylinder
 
 sensor_cylinder = cylinder(axis=vector(0,0,1),pos=vector(0,0,0),radius=R,length=L,opacity=.3)
 
@@ -43,7 +43,7 @@ DisSenHeight = 2 # thickness
 
 for i in range(0,10):
     DisSenR = 50
-    DisSenTheta[i] = 36 * i
+    DisSenTheta[i] = 36 * i + 90
     DisSenX = DisSenR*cos(DisSenTheta[i]*toRad)
     DisSenY = DisSenR*sin(DisSenTheta[i]*toRad)
     DisSenZ = 105
@@ -68,8 +68,8 @@ conArrowLen=80
 
 ConArrow0 = arrow(length=conArrowLen, shaftwidth=5, color=color.yellow)
 
-model = tf.keras.models.load_model('Mean11_0722.h5')
-scaler = load('scaler_01.pkl')
+model = tf.keras.models.load_model('210805_70ms_Mean3ea_wo06.h5')
+scaler = load('210805_70ms_Mean3_SS.pkl')
 
 
 
@@ -91,15 +91,15 @@ while (True):
 
         tof2 = np.array(tof).reshape(-1,1).T
         tof3 = scaler.transform(tof2)
-        #print(tof.shape)
+        #qqqrint(tof.shape)
         Predict = model.predict(tof3)
 
         r = R - 10
-        theta0 = Predict[:,0]
+        # theta0 = np.arctan2(Predict[:,1],Predict[:,0])*toDeg
         z = 110
 
-        costheta = cos(toRad * theta0)
-        sintheta = sin(toRad * theta0)
+        costheta = Predict[:,1]
+        sintheta = Predict[:,0]
 
         conArrowXDir = r * costheta
         conArrowYDir = r * sintheta
@@ -111,7 +111,7 @@ while (True):
         ConArrow0.axis = vector(-conArrowXDir, -conArrowYDir, 0)
         ConArrow0.pos = vector(conArrowXPos, conArrowYPos, z)
 
-        print("theta0=", theta0, "z=", z)
-
-    rate(50)
+        #print("theta0=", theta0, "z=", z)
+        print(" ")
+    rate(30)
 

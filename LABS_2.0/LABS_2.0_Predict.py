@@ -4,14 +4,18 @@ from joblib import dump, load
 import serial
 import time
 
-model = tf.keras.models.load_model('210805_70ms_Mean3ea_wo06.h5')
-scaler = load('210805_70ms_Mean3_SS.pkl')
+# import model and scaler
+model = tf.keras.models.load_model('LABS_v2/210903_70ms_3ea_epoch250_wor4.h5')
+scaler = load('LABS_v2/210903_70ms_Mean3_SS.pkl')
 
-simple = serial.Serial('COM4',115200,timeout=1)
+simple = serial.Serial('COM3',115200,timeout=1)
 
-tof = [0,0,0,0,0,0,0,0,0,0]
+SenNum = 24
+tof = np.zeros(SenNum)
 
+# mat
 toRad = float(np.pi/180)
+toDeg = float(1/toRad)
 
 while (True):
     while (simple.inWaiting()==0):
@@ -19,8 +23,8 @@ while (True):
     SdataPacket = simple.readline()
     SdataPacket = str(SdataPacket, "utf-8")
     SsplitPacket = SdataPacket.split(" ")
-    if len(SsplitPacket) >= 10:
-        for i in range(0,10):
+    if len(SsplitPacket) >= 24:
+        for i in range(0,SenNum):
             tof[i] = float(SsplitPacket[i])
             #print(tof[i],end=' ')
 
@@ -29,7 +33,11 @@ while (True):
         #print(tof.shape)
         Predict_prev = time.time()
         Predict = model.predict(tof3)
-        print('Predict Time :', time.time() - Predict_prev,'cos: ', Predict[:,0],'sin: ', Predict[:, 1])
+        Theta = np.arctan2(Predict[:,2],Predict[:,1])*toDeg
+        z = Predict[:,0]*50+50+30
+        print('Predict Time :', time.time() - Predict_prev,'z: ', z,'cos: ', Predict[:,1],'sin: ',
+              Predict[:,2],'Theta: ',Theta)
+
 
 
 
