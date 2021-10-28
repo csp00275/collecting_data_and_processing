@@ -5,7 +5,7 @@ from joblib import dump, load
 from vpython import *
 from time import *
 
-simple = serial.Serial('COM4',115200,timeout=1)
+simple = serial.Serial('COM3',115200,timeout=1)
 
 tof = [0,0,0,0,0,0,0,0,0,0]
 DisSenTheta=[0,0,0,0,0,0,0,0,0,0,0,0]
@@ -68,8 +68,8 @@ conArrowLen=80
 
 ConArrow0 = arrow(length=conArrowLen, shaftwidth=5, color=color.yellow)
 
-model = tf.keras.models.load_model('210805_70ms_Mean3ea_wo06.h5')
-scaler = load('210805_70ms_Mean3_SS.pkl')
+model = tf.keras.models.load_model('211027_70ms_3ea_Data_2kPa_1.h5')
+scaler = load('211027_70ms_3ea_Data_2kPa_1_SS.pkl')
 
 
 

@@ -6,8 +6,8 @@ import tensorflow as tf
 from joblib import dump, load
 
 # Import model and scaler
-model = tf.keras.models.load_model("C:/Users/Lab/Desktop/LYS/Software/LABS_2.0/myModel/2021_09_28_70ms_3ea_Data_3z.h5")
-scaler = load('C:/Users/Lab/Desktop/LYS/Software/LABS_2.0/myScaler/2021_09_28_70ms_3ea_Data_3z_SS.pkl')
+model = tf.keras.models.load_model("C:/Users/Lab/PycharmProjects/collecting_data_and_processing/LABS_3.0/PM/211027_70ms_3ea_Data_2kPa_323232.h5")
+scaler = load('C:/Users/Lab/PycharmProjects/collecting_data_and_processing/LABS_3.0/SS/211027_70ms_3ea_Data_2kPa_323232_SS.pkl')
 
 # 24 sensors
 SenNum = 24
@@ -20,7 +20,7 @@ toRad = 2*np.pi/360
 toDeg = 1/toRad
 
 # Serial
-arduino = serial.Serial('COM3',115200,timeout=1)  # COM8 Arduino NanoEvery
+arduino = serial.Serial('COM13',115200,timeout=1)  # COM8 Arduino NanoEvery
                                                   # COM3 Arduino Mega 2560
 
 # Canvas

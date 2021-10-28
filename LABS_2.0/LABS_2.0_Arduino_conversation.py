@@ -24,7 +24,7 @@ while True:
     SdataPacket = str(SdataPacket, "utf-8")
     SsplitPacket = SdataPacket.split(" ")
 
-    file_path = "C:/Users/Lab/Desktop/LYS/Software/LABS_2.0/myData/"+run_date+"_70ms_3ea_Data_"+run_time+".csv"
+    file_path = "C:/Users/Lab/Desktop/LYS/Software/LABS_3.0/myData/"+run_date+"_70ms_3ea_Data_"+run_time+"_from140.csv"
 
 
     if len(SsplitPacket) == len(tof)+1:
